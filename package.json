@@ -1,0 +1,25 @@
+{
+  "name": "interview_questions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronabramov/interview_questions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaronabramov/interview_questions/issues"
+  },
+  "homepage": "https://github.com/aaronabramov/interview_questions#readme",
+  "devDependencies": {
+    "jest": "^26.0.1"
+  },
+  "jest": {
+    "testRegex": ".*.[jt]sx?$"
+  }
+}
