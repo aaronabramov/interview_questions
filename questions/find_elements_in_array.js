@@ -11,7 +11,10 @@ const makeArray = () => [...arr];
 
 const toFind = new Array(100).fill(null).map((_, i) => i);
 
-const usingSplice = (arr, toFind) => {
+// This isn't a good approach, since findIndex is a O(n) complexity and for every
+// element we'll be iterating through the whole array, which will result in total
+// complexity of O(arr.length * toFind.length)
+const usingFind = (arr, toFind) => {
   let found = 0;
   for (const i of toFind) {
     if (arr.findIndex((x) => x === i) >= 0) {
@@ -22,6 +25,8 @@ const usingSplice = (arr, toFind) => {
   return found;
 };
 
+// This is a O(log n) solution which would normally be pretty fast, but can get
+// quite slow on very large arr
 const usingBinarySearch = (arr, toFind) => {
   let foundBin = 0;
 
@@ -35,7 +40,6 @@ const usingBinarySearch = (arr, toFind) => {
 
       if (arr[left] === i || middleValue === i) {
         foundBin += 1;
-        // console.log("beraking", {i, left, right}, arr[left], )
         break;
       }
 
@@ -54,6 +58,8 @@ const usingBinarySearch = (arr, toFind) => {
   return foundBin;
 };
 
+// Using a hashmap is always going to be O(1), but there's an initial cost of constructing
+// the hashmap. This is the best solution for large `toFind.length` values.
 const usingHashMap = (arr, toFind) => {
   const hash = arr.reduce((acc, x, i) => {
     acc[x] = i;
@@ -75,7 +81,7 @@ const found = usingHashMap(makeArray(), toFind);
 for (const [name, fn] of [
   ["using binary search", usingBinarySearch],
   ["using hashmap", usingHashMap],
-  ["using splice", usingSplice],
+  ["using find", usingFind],
 ]) {
   test(`find elements in the array using "${name}"`, () => {
     const result = fn(makeArray(), toFind);
